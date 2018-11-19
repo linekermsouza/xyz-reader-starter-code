@@ -76,7 +76,7 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/article_body"
+                    android:id="@+id/article_body_loading"
                     style="?android:attr/textAppearanceMedium"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -86,7 +86,13 @@
                     android:textColor="@color/ltgray"
                     android:textColorLink="@color/theme_accent"
                     android:textSize="@dimen/detail_body_text_size"
+                    android:text="Loading"
                     android:lineSpacingMultiplier="@fraction/detail_body_line_spacing_multiplier" />
+                <WebView
+                    android:id="@+id/article_body"
+                    android:layout_width="match_parent"
+                    android:visibility="invisible"
+                    android:layout_height="match_parent"></WebView>
 
             </com.example.xyzreader.ui.MaxWidthLinearLayout>
         </FrameLayout>
