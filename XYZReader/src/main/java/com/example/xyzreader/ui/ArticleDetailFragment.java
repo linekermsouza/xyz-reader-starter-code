@@ -1,5 +1,6 @@
 package com.example.xyzreader.ui;
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.Intent;
@@ -8,7 +9,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 
 import java.text.ParseException;
@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.graphics.Palette;
 import android.text.Html;
@@ -235,7 +236,7 @@ public class ArticleDetailFragment extends Fragment implements
                                 + "</font>"));
 
             }
-            bodyView.loadDataWithBaseURL("", mCursor.getString(ArticleLoader.Query.BODY), "text/html", "UTF-8", "");
+            bodyView.loadDataWithBaseURL("file:///android_asset/", getHtmlBodyData(), "text/html", "UTF-8", "");
             bodyView.setWebViewClient(new WebViewClient() {
                 @Override
                 public void onPageFinished(WebView view, String url) {
@@ -270,6 +271,44 @@ public class ArticleDetailFragment extends Fragment implements
             bylineView.setText("N/A" );
             //bodyView.setText("N/A");
         }
+    }
+
+    @NonNull
+    private String getHtmlBodyData() {
+        String htmlText = mCursor.getString(ArticleLoader.Query.BODY);
+        int fontSize = (int) (getResources().getDimension(R.dimen.detail_body_text_size)/2);
+        @SuppressLint("ResourceType") String fontColor = (getResources().getString(R.color.dkgray)).replace("#ff", "#");
+        @SuppressLint("ResourceType") String fontColorLink = (getResources().getString(R.color.theme_accent)).replace("#ff", "#");
+        @SuppressLint("ResourceType") String lineHeight = getResources().getString(R.fraction.detail_body_line_spacing_multiplier);
+        StringBuilder builder = new StringBuilder();
+        builder.append("<html>\n" +
+                "<head>\n" +
+                "<style type=\"text/css\">\n" +
+                "@font-face {\n" +
+                "    font-family: MyFont;\n" +
+                "    src: url(\"file:///android_asset/Rosario-Regular.ttf\")\n" +
+                "}\n" +
+                "body {\n" +
+                "    font-family: MyFont;\n" +
+                "    font-size: " + fontSize + "px;\n" +
+                "    text-align: left;\n" +
+                "    margin: 0;\n" +
+                "    width: 100%;\n" +
+                "    word-wrap: break-word;\n" +
+                "    overflow-x: hidden;\n" +
+                "    color: " + fontColor + ";\n" +
+                "    line-height: " + lineHeight + ";\n" +
+                "}\n" +
+                "a {\n" +
+                "    color: " + fontColorLink + ";\n" +
+                "}\n" +
+                "</style>\n" +
+                "</head>\n" +
+                "<body>");
+        builder.append(htmlText);
+        builder.append("</body>\n" +
+                "</html>");
+        return builder.toString();
     }
 
     @Override

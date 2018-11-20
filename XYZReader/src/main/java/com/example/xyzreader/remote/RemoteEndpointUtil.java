@@ -44,7 +44,9 @@ public class RemoteEndpointUtil {
     }
 
     static String fetchPlainText(URL url) throws IOException {
-        OkHttpClient client = new OkHttpClient();
+        //OkHttpClient client = new OkHttpClient();
+        // to run on my old tablet
+        OkHttpClient client = UnsafeOkHttpClient.get();
 
         Request request = new Request.Builder()
                 .url(url)

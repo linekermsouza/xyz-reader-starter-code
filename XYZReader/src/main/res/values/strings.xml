@@ -8,5 +8,7 @@
     <string name="action_share">Share</string>
 
     <string name="up">Up</string>
+    <string name="updating_list">Updating list, wait a moment...</string>
+    <string name="loading">Loading....</string>
 
 </resources>
