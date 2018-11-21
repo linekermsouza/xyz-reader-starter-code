@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.LoaderManager;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -27,6 +28,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -133,7 +135,9 @@ public class ArticleDetailFragment extends Fragment implements
             public void onScrollChanged() {
                 mScrollY = mScrollView.getScrollY();
                 getActivityCast().onUpButtonFloorChanged(mItemId, ArticleDetailFragment.this);
-                mPhotoContainerView.setTranslationY((int) (mScrollY - mScrollY / PARALLAX_FACTOR));
+                if (!getResources().getBoolean(R.bool.tablet_landscape)) {
+                    mPhotoContainerView.setTranslationY((int) (mScrollY - mScrollY / PARALLAX_FACTOR));
+                }
                 updateStatusBar();
             }
         });
@@ -236,6 +240,20 @@ public class ArticleDetailFragment extends Fragment implements
                                 + "</font>"));
 
             }
+            final WebSettings webSettings = bodyView.getSettings();
+            Resources res = getResources();
+            @SuppressLint("ResourceType") String fontSize = res.getString(R.dimen.detail_body_text_size).replace(".0sp", "");
+            webSettings.setDefaultFontSize(Integer.valueOf(fontSize));
+            /*
+            webSettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
+            webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+            webSettings.setAppCacheEnabled(false);
+            webSettings.setBlockNetworkImage(true);
+            webSettings.setLoadsImagesAutomatically(true);
+            webSettings.setGeolocationEnabled(false);
+            webSettings.setNeedInitialFocus(false);
+            webSettings.setSaveFormData(false);
+*/
             bodyView.loadDataWithBaseURL("file:///android_asset/", getHtmlBodyData(), "text/html", "UTF-8", "");
             bodyView.setWebViewClient(new WebViewClient() {
                 @Override
@@ -269,14 +287,12 @@ public class ArticleDetailFragment extends Fragment implements
             mRootView.setVisibility(View.GONE);
             titleView.setText("N/A");
             bylineView.setText("N/A" );
-            //bodyView.setText("N/A");
         }
     }
 
     @NonNull
     private String getHtmlBodyData() {
         String htmlText = mCursor.getString(ArticleLoader.Query.BODY);
-        int fontSize = (int) (getResources().getDimension(R.dimen.detail_body_text_size)/2);
         @SuppressLint("ResourceType") String fontColor = (getResources().getString(R.color.dkgray)).replace("#ff", "#");
         @SuppressLint("ResourceType") String fontColorLink = (getResources().getString(R.color.theme_accent)).replace("#ff", "#");
         @SuppressLint("ResourceType") String lineHeight = getResources().getString(R.fraction.detail_body_line_spacing_multiplier);
@@ -290,7 +306,6 @@ public class ArticleDetailFragment extends Fragment implements
                 "}\n" +
                 "body {\n" +
                 "    font-family: MyFont;\n" +
-                "    font-size: " + fontSize + "px;\n" +
                 "    text-align: left;\n" +
                 "    margin: 0;\n" +
                 "    width: 100%;\n" +

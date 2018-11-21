@@ -148,7 +148,9 @@ public class ArticleDetailActivity extends ActionBarActivity
 
     private void updateUpButtonPosition() {
         int upButtonNormalBottom = mTopInset + mUpButton.getHeight();
-        mUpButton.setTranslationY(Math.min(mSelectedItemUpButtonFloor - upButtonNormalBottom, 0));
+        if (!getResources().getBoolean(R.bool.tablet_landscape)) {
+            mUpButton.setTranslationY(Math.min(mSelectedItemUpButtonFloor - upButtonNormalBottom, 0));
+        }
     }
 
     private class MyPagerAdapter extends FragmentStatePagerAdapter {
