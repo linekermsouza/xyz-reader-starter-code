@@ -1,27 +1,29 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/coordinator_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_marginLeft="@dimen/list_toolbar_side_margin"
-        android:layout_marginRight="@dimen/list_toolbar_side_margin"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/list_toolbar_height"
-        android:background="?colorPrimary"
-        android:elevation="8dp"
-        android:layout_gravity="bottom">
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_marginLeft="@dimen/list_toolbar_side_margin"
+            android:layout_marginRight="@dimen/list_toolbar_side_margin"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/list_toolbar_height"
+            android:background="?colorPrimary"
+            android:elevation="8dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/logo"
-            android:contentDescription="@string/app_name" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logo"
+                android:contentDescription="@string/app_name" />
 
-    </android.support.v7.widget.Toolbar>
-
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
     <include layout="@layout/activity_article_list_content" />
 
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>
