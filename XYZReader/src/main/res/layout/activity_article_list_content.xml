@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/list_toolbar_height"
+    android:elevation="@dimen/refresh_elevation"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <android.support.v7.widget.RecyclerView
@@ -13,5 +14,5 @@
         android:scrollbarStyle="outsideOverlay"
         android:paddingLeft="@dimen/list_side_margin"
         android:paddingRight="@dimen/list_side_margin"
-        android:paddingBottom="28dp" />
+        android:paddingBottom="@dimen/recycler_bottom" />
 </android.support.v4.widget.SwipeRefreshLayout>

@@ -2,12 +2,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="4dp"
-    android:layout_marginRight="4dp"
-    android:layout_marginTop="6dp"
-    android:layout_marginBottom="2dp"
+    android:layout_marginLeft="@dimen/item_margin_side"
+    android:layout_marginRight="@dimen/item_margin_side"
+    android:layout_marginTop="@dimen/item_margin_top"
+    android:layout_marginBottom="@dimen/item_margin_bottom"
     android:clickable="true"
     android:focusable="true"
+    android:elevation="@dimen/card_elevation"
     android:foreground="?selectableItemBackground">
 
     <LinearLayout
@@ -27,13 +28,13 @@
             style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:paddingTop="16dp"
-            android:paddingRight="16dp"
-            android:paddingBottom="4dp"
-            android:textColor="#323232"
+            android:paddingLeft="@dimen/title_margin_side"
+            android:paddingTop="@dimen/title_margin_side"
+            android:paddingRight="@dimen/title_padding_right"
+            android:paddingBottom="@dimen/title_padding_bottom"
+            android:textColor="@color/text_color_dark"
             android:textStyle="bold"
-            android:textSize="20sp"
+            android:textSize="@dimen/text_size_title"
             android:ellipsize="end"
             android:maxLines="4" />
 
@@ -42,10 +43,10 @@
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingBottom="16dp"
-            android:textColor="#6000"
+            android:paddingLeft="@dimen/subtitle_padding"
+            android:paddingRight="@dimen/subtitle_padding"
+            android:paddingBottom="@dimen/subtitle_padding"
+            android:textColor="@color/subtitle_text_color"
             android:maxLines="2"
             android:ellipsize="end" />
     </LinearLayout>

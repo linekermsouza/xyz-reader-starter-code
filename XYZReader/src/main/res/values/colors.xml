@@ -23,4 +23,9 @@
     <color name="theme_accent">#e55a20</color>
     <color name="ltgray">#ffe0e0e0</color>
     <color name="dkgray">#777777</color>
+    <color name="dark">#333</color>
+    <color name="white">#fff</color>
+    <color name="light">#8fff</color>
+    <color name="text_color_dark">#323232</color>
+    <color name="subtitle_text_color">#6000</color>
 </resources>
